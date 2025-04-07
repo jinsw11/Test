@@ -114,3 +114,34 @@ class WaterBall : MagicSkill
 {
     public override void Cast() => Console.WriteLine("워터볼 발사!");
 }
+
+// ===== 업적 해금 시스템 =====
+public interface ICounter
+{
+    int Count(int current);
+}
+
+public class CastCounter : ICounter
+{
+    public int Count(int current) => current + 1;
+}
+
+public class AchievementUnlock
+{
+    private ICounter counter;
+    private int currentCount = 0;
+
+    public AchievementUnlock(ICounter counter)
+    {
+        this.counter = counter;
+    }
+
+    public void CheckCasting()
+    {
+        currentCount = counter.Count(currentCount);
+        if (currentCount == 100)
+        {
+            Console.WriteLine("업적 해금! 스킬 100회 사용!");
+        }
+    }
+}
