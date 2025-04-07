@@ -42,3 +42,20 @@ public class PlayerMeele : IAttack, IMove
     public void Move() => Console.WriteLine("플레이어가 움직입니다");
     public void Attack() => Console.WriteLine("일반 공격");
 }
+
+// ===== 마법 스킬 종류 =====
+public abstract class MagicSkill
+{
+    public abstract void Cast();
+}
+
+// 파이어볼
+class FireBall : MagicSkill
+{
+    public override void Cast() => Console.WriteLine("파이어볼 발사!");
+}
+// 워터볼
+class WaterBall : MagicSkill
+{
+    public override void Cast() => Console.WriteLine("워터볼 발사!");
+}
