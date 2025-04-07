@@ -64,6 +64,40 @@ public class PlayerMagic : ISkillCast, IMove
     }
 }
 
+// ===== 상태 구현 =====
+public class MeeleState : IState
+{
+    private PlayerMeele player = new PlayerMeele();
+
+    public void Enter() => Console.WriteLine("Meele Mod");
+    public void Exit() => Console.WriteLine("Meele Mod Exit");
+    public void Update()
+    {
+        player.Move();
+        player.Attack();
+    }
+}
+
+// MagicState
+public class MagicState : IState
+{
+    private PlayerMagic player;
+
+    public MagicState(PlayerMagic player)
+    {
+        this.player = player;
+    }
+
+    public void Enter() => Console.WriteLine("Magic Mod");
+    public void Exit() => Console.WriteLine("Magic Mod Exit");
+    public void Update()
+    {
+        // Console.WriteLine("Magic 로직 실행 중");
+        player.Move();
+        player.CastingSkill();
+    }
+}
+
 // ===== 마법 스킬 종류 =====
 public abstract class MagicSkill
 {
