@@ -2,6 +2,31 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+// ===== 사용 예시 =====
+class Test
+{
+    static void Main()
+    {
+        var counter = new CastCounter();
+        var achievement = new AchievementUnlock(counter);
+        var selectedSkill = new FireBall(); // or WaterBall();
+        var magicPlayer = new PlayerMagic(selectedSkill, achievement);
+
+        var stateManager = new StateManager();
+
+        // 물리모드 진입
+        stateManager.PushState(new MeeleState());
+        stateManager.Update(); // 이동, 공격
+
+        // 마법모드 진입
+        stateManager.PushState(new MagicState(magicPlayer));
+
+        // 테스트 : 100회 시전
+        for (int i = 0; i < 10; i++)
+            stateManager.Update();
+    }
+}
+
 // ===== 인터페이스 및 상태 =====
 public interface IState
 {
