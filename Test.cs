@@ -35,3 +35,10 @@ public class StateManager
             stateStack.Peek().Update();
     }
 }
+
+// ===== 플레이어 - 물리 모드 =====
+public class PlayerMeele : IAttack, IMove
+{
+    public void Move() => Console.WriteLine("플레이어가 움직입니다");
+    public void Attack() => Console.WriteLine("일반 공격");
+}
