@@ -14,3 +14,24 @@ public interface IState
 public interface IAttack { void Attack(); }
 public interface ISkillCast { void CastingSkill(); }
 public interface IMove { void Move(); }
+
+// ===== 스택 기반 상태 관리 =====
+public class StateManager
+{
+    private Stack<IState> stateStack = new Stack<IState>();
+
+    public void PushState(IState state)
+    {
+        if (stateStack.Count > 0)
+            stateStack.Peek().Exit();
+
+        stateStack.Push(state);
+        state.Enter();
+    }
+
+    public void Update()
+    {
+        if (stateStack.Count > 0)
+            stateStack.Peek().Update();
+    }
+}
