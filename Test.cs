@@ -43,6 +43,27 @@ public class PlayerMeele : IAttack, IMove
     public void Attack() => Console.WriteLine("일반 공격");
 }
 
+// ===== 플레이어 - 마법 모드 =====
+public class PlayerMagic : ISkillCast, IMove
+{
+    private MagicSkill currentSkill;
+    private AchievementUnlock achievement;
+
+    public PlayerMagic(MagicSkill skill, AchievementUnlock unlockSystem)
+    {
+        currentSkill = skill;
+        achievement = unlockSystem;
+    }
+
+    public void Move() => Console.WriteLine("플레이어가 움직입니다");
+
+    public void CastingSkill()
+    {
+        currentSkill.Cast();
+        achievement.CheckCasting();
+    }
+}
+
 // ===== 마법 스킬 종류 =====
 public abstract class MagicSkill
 {
